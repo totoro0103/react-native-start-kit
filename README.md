@@ -8,7 +8,7 @@
 
 # Command
 ### ios
-* react-native run-ios
 * cd ./ios
 * pod install
 * react-native link
+* react-native run-ios
