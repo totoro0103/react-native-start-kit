@@ -55,6 +55,10 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>BeVietnam-Regular.ttf</string>
+		<string>BeVietnam-Bold.ttf</string>
+		<string>BeVietnam-SemiBold.ttf</string>
+		<string>BeVietnam-LightItalic.ttf</string>
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
@@ -63,20 +67,24 @@
 		<string>FontAwesome5_Brands.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
+		<string>Fontisto.ttf</string>
 		<string>Foundation.ttf</string>
 		<string>Ionicons.ttf</string>
-		<string>MaterialIcons.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
-		<string>SimpleLineIcons.ttf</string>
+		<string>MaterialIcons.ttf</string>
 		<string>Octicons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>Fontisto.ttf</string>
-		<string>iCielVAGRoundedNext-Bold.otf</string>
-		<string>iCielVAGRoundedNext-DemiBold.otf</string>
-		<string>iCielVAGRoundedNext-Light.otf</string>
-		<string>iCielVAGRoundedNext-LightItalic.otf</string>
-		<string>iCielVAGRoundedNext-Medium.otf</string>
-		<string>iCielVAGRoundedNext-Regular.otf</string>
+		<string>BeVietnam-BoldItalic.ttf</string>
+		<string>BeVietnam-ExtraBold.ttf</string>
+		<string>BeVietnam-ExtraBoldItalic.ttf</string>
+		<string>BeVietnam-Italic.ttf</string>
+		<string>BeVietnam-Light.ttf</string>
+		<string>BeVietnam-Medium.ttf</string>
+		<string>BeVietnam-MediumItalic.ttf</string>
+		<string>BeVietnam-SemiBoldItalic.ttf</string>
+		<string>BeVietnam-Thin.ttf</string>
+		<string>BeVietnam-ThinItalic.ttf</string>
 	</array>
 </dict>
 </plist>

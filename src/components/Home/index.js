@@ -1,20 +1,23 @@
 import React from 'react';
 import {
-  Button, StyleSheet, Text, View,
+  StyleSheet, View,
 } from 'react-native';
+import { Button, Input } from 'react-native-elements';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
 });
 
-const Home = ({ navigation }) => (
+const Home = () => (
   <View style={styles.container}>
-    <Text>Home</Text>
-    <Button title="Go To Search" onPress={() => navigation.navigate('Search')} />
+    <Input placeholder="Email" />
+    <Input placeholder="Password" />
+    <Button title="Sign in" />
   </View>
 );
 

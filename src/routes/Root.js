@@ -61,7 +61,7 @@ const Root = () => {
   return (
     <View style={styles.mainContainer}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home" headerMode="none">
+        <Stack.Navigator initialRouteName="Login" headerMode="none">
           <Stack.Screen name="Drawer" component={DrawerNavigator} />
           <Stack.Screen
             name="Home"
