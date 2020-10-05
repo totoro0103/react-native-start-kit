@@ -2,18 +2,60 @@ import React, { useEffect, useState } from 'react';
 import { Keyboard, Platform, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Toast from 'react-native-simple-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import Home from '../components/Home';
 import Search from '../components/Search';
-import DrawerNavigator from './DrawerNavigator';
+import SignIn from '../components/SignIn';
 import styles from './styles';
 import { clearNetworkFail } from '../redux/actions/share';
+import TabNavigator from './TabNavigator';
 
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const AuthStack = createStackNavigator();
+const AuthStackScreen = () => (
+  <AuthStack.Navigator>
+    <AuthStack.Screen
+      name="SignIn"
+      component={SignIn}
+      options={{ title: 'Sign In' }}
+    />
+  </AuthStack.Navigator>
+);
+
+const DrawerScreen = () => (
+  <Drawer.Navigator initialRouteName="Profile">
+    <Drawer.Screen name="Home" component={TabNavigator} />
+    <Drawer.Screen name="Search" component={Search} />
+  </Drawer.Navigator>
+);
+
+const RootStack = createStackNavigator();
+const RootStackScreen = ({ userToken }) => (
+  <RootStack.Navigator headerMode="none">
+    {userToken ? (
+      <RootStack.Screen
+        name="App"
+        component={DrawerScreen}
+        options={{
+          animationEnabled: false,
+        }}
+      />
+    ) : (
+      <RootStack.Screen
+        name="Auth"
+        component={AuthStackScreen}
+        options={{
+          animationEnabled: false,
+        }}
+      />
+    )}
+  </RootStack.Navigator>
+);
 
 const Root = () => {
-  const sendNetworkFail = useSelector((state) => state.sendNetworkFail);
+  const { sendNetworkFail } = useSelector((state) => state.share);
   const [isKeyboardShow, setIsKeyboardShow] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const dispatch = useDispatch();
@@ -61,19 +103,7 @@ const Root = () => {
   return (
     <View style={styles.mainContainer}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login" headerMode="none">
-          <Stack.Screen name="Drawer" component={DrawerNavigator} />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ gestureEnabled: true, gestureDirection: 'horizontal' }}
-          />
-          <Stack.Screen
-            name="Search"
-            component={Search}
-            options={{ gestureEnabled: true, gestureDirection: 'horizontal' }}
-          />
-        </Stack.Navigator>
+        <RootStackScreen userToken="abc" />
       </NavigationContainer>
 
       {/* Keyboard padding */}

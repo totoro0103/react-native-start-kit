@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-  StyleSheet, View,
+  StyleSheet, View, Text, TextInput,
 } from 'react-native';
-import { Button, Input } from 'react-native-elements';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: 'white',
   },
@@ -15,9 +14,8 @@ const styles = StyleSheet.create({
 
 const Home = () => (
   <View style={styles.container}>
-    <Input placeholder="Email" />
-    <Input placeholder="Password" />
-    <Button title="Sign in" />
+    <Text>Home</Text>
+    <TextInput placeholder="abc" />
   </View>
 );
 
