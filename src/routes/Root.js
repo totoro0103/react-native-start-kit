@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Keyboard, Platform, View } from 'react-native';
+import {
+  Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback,
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -56,31 +58,8 @@ const RootStackScreen = ({ userToken }) => (
 
 const Root = () => {
   const { sendNetworkFail } = useSelector((state) => state.share);
-  const [isKeyboardShow, setIsKeyboardShow] = useState(false);
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const dispatch = useDispatch();
   const clearNetworkStatus = () => dispatch(clearNetworkFail());
-
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      (e) => {
-        setIsKeyboardShow(true);
-        setKeyboardHeight(e.endCoordinates.height);
-      },
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => {
-        setIsKeyboardShow(false);
-      },
-    );
-
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, []);
 
   if (sendNetworkFail.err) {
     switch (sendNetworkFail.err) {
@@ -101,16 +80,14 @@ const Root = () => {
   }
 
   return (
-    <View style={styles.mainContainer}>
-      <NavigationContainer>
-        <RootStackScreen userToken="abc" />
-      </NavigationContainer>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAvoidingView behavior="padding" style={styles.mainContainer}>
+        <NavigationContainer>
+          <RootStackScreen userToken="abc" />
+        </NavigationContainer>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
 
-      {/* Keyboard padding */}
-      {isKeyboardShow && Platform.OS === 'ios' ? (
-        <View style={{ height: keyboardHeight }} />
-      ) : null}
-    </View>
   );
 };
 

@@ -8,6 +8,7 @@ import { ThemeProvider } from 'react-native-elements';
 import Root from './src/routes/Root';
 import rootReducer from './src/redux/reducers';
 import { fontFamily } from './src/constant/common';
+import OverlayProvider from './src/utils/providers/OverlayProvider';
 
 const theme = {
   Button: {
@@ -44,7 +45,9 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 const App = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <Root />
+      <OverlayProvider>
+        <Root />
+      </OverlayProvider>
     </ThemeProvider>
   </Provider>
 

@@ -11,7 +11,7 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/prop-types': 0,
-
+    'react/jsx-props-no-spreading': 0,
   },
   globals: {
     document: true,
