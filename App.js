@@ -11,6 +11,7 @@ import rootReducer from './src/redux/reducers';
 import { fontFamily } from './src/constant/common';
 import OverlayProvider from './src/utils/providers/OverlayProvider';
 import { defaultTheme } from './src/themes/override';
+import './src/i18n';
 
 const customTextProps = {
   style: {

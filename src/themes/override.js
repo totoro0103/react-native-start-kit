@@ -16,6 +16,12 @@ export const defaultTheme = {
     buttonContainerStyle: {
       backgroundColor: colors.white,
     },
+    containerStyle: {
+      borderColor: colors.primary,
+    },
+    innerBorderStyle: {
+      color: colors.primary,
+    },
     textStyle: {
       color: colors.primary,
     },
@@ -43,6 +49,12 @@ export const darkTheme = {
       backgroundColor: colors.black,
     },
     textStyle: {
+      color: colors.white,
+    },
+    containerStyle: {
+      borderColor: colors.white,
+    },
+    innerBorderStyle: {
       color: colors.white,
     },
     selectedButtonStyle: {
