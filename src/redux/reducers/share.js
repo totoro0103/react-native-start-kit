@@ -1,21 +1,16 @@
-import { CLEAR_NETWORK_FAIL, SEND_NETWORK_FAIL } from '../actions/share';
+import { fromJS } from 'immutable';
+import { SET_THEME } from '../actions/share';
+import { THEMES } from '../../constant/common';
 
 const initialState = {
-  sendNetworkFail: {
-    fetching: false, data: null, err: null,
-  },
+  themeSettings: THEMES.SYSTEM,
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case SEND_NETWORK_FAIL:
-      return {
-        err: action.payload.err,
-      };
-    case CLEAR_NETWORK_FAIL:
-      return {
-        err: null,
-      };
+export default (state = fromJS(initialState), action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case SET_THEME:
+      return state.setIn(['themeSettings'], payload);
     default:
       return state;
   }

@@ -13,7 +13,6 @@ const initialState = {
   signOut: {
     loading: false,
   },
-
 };
 
 export default (state = fromJS(initialState), action) => {

@@ -1,19 +1,17 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-});
+import { PricingCard } from 'react-native-elements';
+import colors from '../../themes/colors';
 
 const Search = () => (
-  <View style={styles.container}>
-    <Text>Search</Text>
-  </View>
+  <PricingCard
+    color={colors.primary}
+    title="Free"
+    price="$0"
+    info={['1 User', 'Basic Support', 'All Core Features']}
+    button={{ title: 'GET STARTED', icon: 'flight-takeoff' }}
+  />
+
 );
 
 export default Search;

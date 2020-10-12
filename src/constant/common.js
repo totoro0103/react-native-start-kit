@@ -13,3 +13,9 @@ export const fontFamily = {
   demiBold: 'BeVietnam-SemiBold',
   lightItalic: 'BeVietnam-LightItalic',
 };
+
+export const THEMES = {
+  DARK: 'dark',
+  LIGHT: 'light',
+  SYSTEM: 'system',
+};

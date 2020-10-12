@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import appStyles from '../themes/appStyles';
+import { ApplicationStyle } from '../themes/appStyles';
 import colors from '../themes/colors';
 import { fontFamily, fontSize } from '../constant/common';
 
 export default StyleSheet.create({
-  ...appStyles,
+  ...ApplicationStyle,
   viewNetworkErr: {
     position: 'absolute',
     left: 0,

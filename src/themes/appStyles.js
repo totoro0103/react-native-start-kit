@@ -22,7 +22,7 @@ export function isIphoneX() {
   );
 }
 
-const ApplicationStyle = StyleSheet.create({
+export const ApplicationStyle = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: colors.bgRoot,
@@ -76,5 +76,3 @@ const ApplicationStyle = StyleSheet.create({
     alignSelf: 'stretch',
   },
 });
-
-export default ApplicationStyle;
