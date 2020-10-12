@@ -5,38 +5,38 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Toast from 'react-native-simple-toast';
-import { useDispatch, useSelector } from 'react-redux';
+// import Toast from 'react-native-simple-toast';
 import Search from '../components/Search';
 import SignIn from '../components/SignIn';
 import styles from './styles';
-import { clearNetworkFail } from '../redux/actions/share';
 import TabNavigator from './TabNavigator';
+import Splash from '../components/Splash';
+import { useAuth } from '../redux/hooks/auth';
+import storage from '../utils/helpers/storage';
 
 const Drawer = createDrawerNavigator();
 
 const AuthStack = createStackNavigator();
 const AuthStackScreen = () => (
-  <AuthStack.Navigator>
+  <AuthStack.Navigator headerMode="none">
     <AuthStack.Screen
       name="SignIn"
       component={SignIn}
-      options={{ title: 'Sign In' }}
     />
   </AuthStack.Navigator>
 );
 
 const DrawerScreen = () => (
-  <Drawer.Navigator initialRouteName="Profile">
+  <Drawer.Navigator initialRouteName="Home">
     <Drawer.Screen name="Home" component={TabNavigator} />
     <Drawer.Screen name="Search" component={Search} />
   </Drawer.Navigator>
 );
 
 const RootStack = createStackNavigator();
-const RootStackScreen = ({ userToken }) => (
+const RootStackScreen = ({ accessToken }) => (
   <RootStack.Navigator headerMode="none">
-    {userToken ? (
+    {accessToken ? (
       <RootStack.Screen
         name="App"
         component={DrawerScreen}
@@ -57,33 +57,46 @@ const RootStackScreen = ({ userToken }) => (
 );
 
 const Root = () => {
-  const { sendNetworkFail } = useSelector((state) => state.share);
-  const dispatch = useDispatch();
-  const clearNetworkStatus = () => dispatch(clearNetworkFail());
+  const [loading, setLoading] = useState(false);
+  const { signIn, actions } = useAuth();
 
-  if (sendNetworkFail.err) {
-    switch (sendNetworkFail.err) {
-      case 'NETWORK_ERROR':
-        Toast.show('No network connection, please try again');
-        break;
-      case 'TIMEOUT_ERROR':
-        Toast.show('Timeout, please try again');
-        break;
-      case 'CONNECTION_ERROR':
-        Toast.show('DNS server not found, please try again');
-        break;
-      default:
-        Toast.show(sendNetworkFail.err);
-        break;
-    }
-    clearNetworkStatus();
-  }
+  useEffect(() => {
+    async function handleFetchUser() {
+      const accessToken = await storage.get(storage.keys.ACCESS_TOKEN);
+      if (accessToken) {
+        setTimeout(() => {
+          setLoading(false);
+          actions.setSignInData({
+            accessToken: 'accessToken',
+            refreshToken: 'refreshToken',
+          });
+        }, 2000);
+      }
+    }handleFetchUser();
+  }, []);
 
+  // if (sendNetworkFail.err) {
+  //   switch (sendNetworkFail.err) {
+  //     case 'NETWORK_ERROR':
+  //       Toast.show('No network connection, please try again');
+  //       break;
+  //     case 'TIMEOUT_ERROR':
+  //       Toast.show('Timeout, please try again');
+  //       break;
+  //     case 'CONNECTION_ERROR':
+  //       Toast.show('DNS server not found, please try again');
+  //       break;
+  //     default:
+  //       Toast.show(sendNetworkFail.err);
+  //       break;
+  //   }
+  //   clearNetworkStatus();
+  // }
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingView behavior="padding" style={styles.mainContainer}>
         <NavigationContainer>
-          <RootStackScreen userToken="abc" />
+          {loading ? <Splash /> : <RootStackScreen accessToken={signIn.accessToken} />}
         </NavigationContainer>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>

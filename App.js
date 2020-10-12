@@ -38,7 +38,6 @@ const customTextInputProps = {
 };
 
 setCustomTextInput(customTextInputProps);
-
 setCustomText(customTextProps);
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

@@ -3,6 +3,7 @@ import {
   StyleSheet, View,
 } from 'react-native';
 import { Button, Input } from 'react-native-elements';
+import { useAuth } from '../../redux/hooks/auth';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,12 +14,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const Login = ({ navigation }) => (
-  <View style={styles.container}>
-    <Input placeholder="Email" />
-    <Input placeholder="Password" />
-    <Button title="Sign in" onPress={() => navigation.navigate('Home')} />
-  </View>
-);
+const SignIn = () => {
+  const { signIn, actions } = useAuth();
 
-export default Login;
+  return (
+    <View style={styles.container}>
+      <Input placeholder="Email" />
+      <Input placeholder="Password" />
+      <Button
+        title="Sign in"
+        loading={signIn.loading}
+        onPress={() => actions.signIn({ email: '', password: '' })}
+      />
+    </View>
+  );
+};
+
+export default SignIn;
